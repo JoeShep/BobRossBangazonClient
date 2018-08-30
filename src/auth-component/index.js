@@ -3,22 +3,17 @@ import "./auth.css";
 
 class Auth extends Component {
 
-  state = {
-    username: "",
-    password: ""
-  }
-
   onChange(e) {
-    const user = Object.assign({}, this.state);
+    const user = Object.assign({}, this.props.authState);
     user[e.target.name] = e.target.value;
-    this.setState(user, () => {
-      console.log("Staaaatee", this.state)
+    this.props.setAuthState(user, () => {
+      console.log("Staaaatee", this.props.authState)
     });
   }
 
   register() {
     console.log("register called")
-    const user = Object.assign({}, this.state);
+    const user = Object.assign({}, this.props.authState);
     console.log("user?", user)
     return fetch("http://127.0.0.1:8080/register/", {
       method: 'POST',
@@ -35,7 +30,7 @@ class Auth extends Component {
       console.log('converted token', responseToken.token);
       localStorage.setItem("token", responseToken.token)
       return this.setState({
-        user: this.state.username,
+        user: this.props.authState.username,
         token: responseToken.token,
         username: "",
         password: ""
@@ -47,7 +42,7 @@ class Auth extends Component {
   }
 
   render() {
-    const { username, password } = this.state
+    const { username, password } = this.props.authState
     return (
       <div>
         <input

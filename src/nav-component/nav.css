@@ -1,0 +1,10 @@
+nav {
+  background: purple;
+  color: white;
+  height: 3.5em;
+}
+
+nav li {
+  list-style: none;
+  display: inline-block;
+}
