@@ -8,7 +8,17 @@ class App extends Component {
   state = {
     username: "",
     password: "",
-    isAuth: false
+    first_name: "",
+    last_name: "",
+    email: "",
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
+    isAuth: false,
+    register: false,
+    showUserForm: false,
+    user: ""
   }
 
   setAuthState(authObj) {
@@ -18,9 +28,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav isAuth={this.state.isAuth}/>
+        <Nav isAuth={this.state.isAuth} user={this.state.user} setAuthState={ (obj) => this.setAuthState(obj)}/>
         <h1>This is Bangazon, Bob Ross style</h1>
-        <Auth authState={this.state} setAuthState={ (obj) => this.setAuthState(obj)} />
+
+        {this.state.showUserForm ? <Auth authState={this.state} setAuthState={ (obj) => this.setAuthState(obj)} /> : null}
       </div>
     );
   }
