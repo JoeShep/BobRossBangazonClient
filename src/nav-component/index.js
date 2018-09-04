@@ -45,9 +45,11 @@ class Nav extends Component {
           <li>
             <button onClick = { () => isAuth ? this.logOut() : this.displayLogin()}> Log {isAuth ? "out" : "in"} </button>
           </li>
+          { !isAuth &&
           <li>
             <button onClick={ () => this.displayRegister()}>Register</button>
           </li>
+          }
         </ul>
       </nav>
     )
