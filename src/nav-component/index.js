@@ -11,22 +11,37 @@ class Nav extends Component {
   }
 
   displayLogin() {
-    console.log("Something coming here soon")
     this.props.setAuthState({
       register: false,
       showUserForm: true
     })
   }
 
+  displayProdForm() {
+    this.props.displaySell()
+  }
+
+  logOut() {
+    this.props.logOut()
+  }
+
   render() {
     const isAuth = this.props.isAuth
+    console.log("isAuth?", isAuth)
     return (
       <nav>
         <h3>This is a nav bar</h3>
-        { isAuth &&
-          <h3>Welcome, {this.props.user}</h3>
-        }
         <ul>
+          { isAuth &&
+            <span>
+              <li>
+                <h3>Welcome, {this.props.user}</h3>
+              </li>
+              <li>
+                <button onClick={ () => this.displayProdForm() }>Sell</button>
+              </li>
+            </span>
+          }
           <li>
             <button onClick = { () => isAuth ? this.logOut() : this.displayLogin()}> Log {isAuth ? "out" : "in"} </button>
           </li>

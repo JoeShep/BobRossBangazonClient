@@ -13,9 +13,9 @@ class Auth extends Component {
   }
 
   postAuth(route, user) {
-    console.log("register called")
+    console.log("postAuth called")
     console.log("user?", user)
-    return fetch(`http://127.0.0.1:8080/${route}/`, {
+    return fetch(`http://127.0.0.1:8000/${route}/`, {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
@@ -29,6 +29,7 @@ class Auth extends Component {
     .then((responseToken) => {
       console.log('converted token', responseToken.token);
       localStorage.setItem("token", responseToken.token)
+      localStorage.setItem("user", this.props.authState.username)
       return this.props.setAuthState({
         user: this.props.authState.username,
         token: responseToken.token,
@@ -42,7 +43,7 @@ class Auth extends Component {
     })
   }
 
-  logIn() {
+  login() {
     // create an object with username and password keys and submit it to the Django API
     const user = {
       username: this.props.authState.username,
